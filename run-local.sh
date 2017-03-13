@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-./run.sh "$(pwd)/local"
+./run.sh "$(pwd)/local" 8980 8943
