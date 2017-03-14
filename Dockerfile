@@ -16,3 +16,9 @@ COPY docker/config-merge.sh             /config-merge.sh
 COPY docker/config-merge-entrypoint.sh  /config-merge-entrypoint.sh
 COPY docker/acme-http01-webroot.lua     /usr/local/etc/haproxy/acme-http01-webroot.lua
 COPY docker/config                      /usr/local/etc/haproxy/config
+COPY docker/add-site.sh                 /add-site.sh
+
+ENV TEMPLATES_DIR="/usr/local/etc/haproxy/config/templates/domain"
+ENV CONFIG_DIR="/usr/local/etc/haproxy/haproxy.cfg.d"
+ENV WEBROOT_DIR="/var/lib/haproxy/webroot"
+ENV LETSENCRYPT_LIVE_DIR="/etc/letsencrypt/live"
