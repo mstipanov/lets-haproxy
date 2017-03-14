@@ -11,8 +11,14 @@ Steps:
 * ./build.sh
 * ./run.sh "$(pwd)/local" 80 443
 
-## Request certificate:
-TODO: extract to convenient script!
+## Request certificate and add config:
 Steps:
-* docker exec -it lets-haproxy ash
-* letsencrypt certonly -n --text --webroot --webroot-path /var/lib/haproxy/webroot -d domain.one --renew-by-default --agree-tos --email admin@domain.one
+* docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest.example.com server1 www.mysite1.com:80
+* docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest2.example.com server1 www.mysite2.com:80
+* docker restart lets-haproxy
+
+## Useful commands:
+Check haproxy config:
+* docker exec -it lets-haproxy haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg
+Show haproxy config:
+* docker exec -it lets-haproxy cat /usr/local/etc/haproxy/haproxy.cfg
