@@ -12,6 +12,9 @@ Steps:
 * ./run.sh "$(pwd)/local" 80 443
 
 ## Request certificate and add config:
+Prerequisites:
+* Existing DNS A records pointing on your public IP for: letstest.example.com and letstest2.example.com
+
 Steps:
 * docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest.example.com server1 www.mysite1.com:80
 * docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest2.example.com server1 www.mysite2.com:80
