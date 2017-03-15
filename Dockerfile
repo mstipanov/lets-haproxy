@@ -18,8 +18,8 @@ COPY docker/config-merge-entrypoint.sh  /config-merge-entrypoint.sh
 COPY docker/acme-http01-webroot.lua     /usr/local/etc/haproxy/acme-http01-webroot.lua
 COPY docker/config                      /usr/local/etc/haproxy/config
 COPY docker/add-site.sh                 /add-site.sh
-COPY docker/datefidff.py                /datefidff.py
-COPY docker/renew-certs.sh            /renew-certs.sh
+COPY docker/datediff.py                 /datediff.py
+COPY docker/renew-certs.sh              /renew-certs.sh
 
 ENV TEMPLATES_DIR="/usr/local/etc/haproxy/config/templates/domain"
 ENV CONFIG_DIR="/usr/local/etc/haproxy/haproxy.cfg.d"
