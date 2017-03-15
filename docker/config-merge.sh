@@ -38,7 +38,6 @@ if [ "$https_exists" -eq "1" ]; then
             dir=${i##*/}
             if [ -f "/usr/local/etc/haproxy/haproxy.cfg.d/$dir/frontend_https.cfg" ]; then
                 echo "  Appending https: $dir"
-                cat /etc/letsencrypt/live/${dir}/privkey.pem /etc/letsencrypt/live/${dir}/fullchain.pem | tee /etc/letsencrypt/live/${dir}/haproxy.pem
                 sed -i -- "s/<https_frontend_certs>/crt ${dir}\/haproxy.pem <https_frontend_certs>/g" /usr/local/etc/haproxy/haproxy.cfg
                 append_haproxy_conf "/usr/local/etc/haproxy/haproxy.cfg.d/$dir/frontend_https.cfg"
             fi

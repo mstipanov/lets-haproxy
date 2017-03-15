@@ -20,6 +20,15 @@ Steps:
 * docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest2.example.com server1 www.mysite2.com:80
 * docker restart lets-haproxy
 
+## Renew certificates 
+Older than 15 days:
+* docker exec -it lets-haproxy /renew-certs.sh
+* docker restart lets-haproxy
+
+Older than 45 days:
+* docker exec -it lets-haproxy /renew-certs.sh 45
+* docker restart lets-haproxy
+
 ## Useful commands:
 Check haproxy config:
 * docker exec -it lets-haproxy haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg

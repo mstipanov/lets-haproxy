@@ -43,4 +43,5 @@ else
     echo "Config exists for $DOMAIN"
 fi
 
-haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg
+#TODO Create and verify new config
+#haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg
