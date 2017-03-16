@@ -1,21 +1,16 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 E_MAIL=$1
 if [ -z ${E_MAIL} ]; then
-    echo "E_MAIL must ne the first parameter!"
+    echo "E_MAIL must be the first parameter!"
     exit 2
 fi
 
 DOMAIN=$2
 if [ -z ${DOMAIN} ]; then
-    echo "DOMAIN must ne the second parameter!"
+    echo "DOMAIN must be the second parameter!"
     exit 1
-fi
-
-if [ -z ${E_MAIL} ]; then
-    echo "E_MAIL must ne the first parameter!"
-    exit 2
 fi
 
 if [ ! -d "${LETSENCRYPT_LIVE_DIR}/$DOMAIN" ]; then
@@ -43,5 +38,12 @@ else
     echo "Config exists for $DOMAIN"
 fi
 
-#TODO Create and verify new config
-#haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg
+/config-merge.sh /usr/local/etc/haproxy/haproxy.cfg.new
+
+haproxy -c -f /usr/local/etc/haproxy/haproxy.cfg.new
+
+rm -f /usr/local/etc/haproxy/haproxy.cfg
+mv /usr/local/etc/haproxy/haproxy.cfg.new /usr/local/etc/haproxy/haproxy.cfg
+
+echo "Soft reloading haproxy by sending SIGHUP"
+kill -1 1

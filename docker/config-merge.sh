@@ -1,16 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env bash
 set -e
+
+HAPROXY_CONFIG=$1
+if [ -z ${HAPROXY_CONFIG} ]; then
+    HAPROXY_CONFIG=/usr/local/etc/haproxy/haproxy.cfg
+fi
 
 append_haproxy_conf () {
     echo "  Appending: $1"
-    echo "##### Start $1 #####" >> /usr/local/etc/haproxy/haproxy.cfg
-    echo "" >> /usr/local/etc/haproxy/haproxy.cfg
-    cat $1 >> /usr/local/etc/haproxy/haproxy.cfg
-    echo "" >> /usr/local/etc/haproxy/haproxy.cfg
-    echo "##### End $1 #####" >> /usr/local/etc/haproxy/haproxy.cfg
+    echo "##### Start $1 #####" >> $HAPROXY_CONFIG
+    echo "" >> $HAPROXY_CONFIG
+    cat $1 >> $HAPROXY_CONFIG
+    echo "" >> $HAPROXY_CONFIG
+    echo "##### End $1 #####" >> $HAPROXY_CONFIG
 }
 
-rm -f /usr/local/etc/haproxy/haproxy.cfg
+rm -f $HAPROXY_CONFIG
 append_haproxy_conf /usr/local/etc/haproxy/config/templates/global.cfg
 append_haproxy_conf /usr/local/etc/haproxy/config/templates/defaults.cfg
 append_haproxy_conf /usr/local/etc/haproxy/config/templates/frontend_http.cfg
@@ -38,11 +43,11 @@ if [ "$https_exists" -eq "1" ]; then
             dir=${i##*/}
             if [ -f "/usr/local/etc/haproxy/haproxy.cfg.d/$dir/frontend_https.cfg" ]; then
                 echo "  Appending https: $dir"
-                sed -i -- "s/<https_frontend_certs>/crt ${dir}\/haproxy.pem <https_frontend_certs>/g" /usr/local/etc/haproxy/haproxy.cfg
+                sed -i -- "s/<https_frontend_certs>/crt ${dir}\/haproxy.pem <https_frontend_certs>/g" $HAPROXY_CONFIG
                 append_haproxy_conf "/usr/local/etc/haproxy/haproxy.cfg.d/$dir/frontend_https.cfg"
             fi
         done;
-        sed -i -- 's/<https_frontend_certs>//g' /usr/local/etc/haproxy/haproxy.cfg
+        sed -i -- 's/<https_frontend_certs>//g' $HAPROXY_CONFIG
     fi
     append_haproxy_conf /usr/local/etc/haproxy/config/templates/https_frontend_default.cfg
 fi

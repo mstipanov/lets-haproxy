@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 set -e
 
 GRACE_DAYS=$1
@@ -29,3 +29,6 @@ if [ "$(ls -A /usr/local/etc/haproxy/haproxy.cfg.d/)" ]; then
         fi
     done;
 fi
+
+echo "Soft reloading haproxy by sending SIGHUP"
+kill -1 1

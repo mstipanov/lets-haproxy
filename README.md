@@ -5,9 +5,6 @@ Let's Encrypt certificate auto-renewal in docker-powered HAProxy reverse proxy
 
 ## Running HAProxy
 
-
-## Running HAProxy
-
 ```bash
 sudo su
 cd ~
@@ -25,8 +22,6 @@ Existing DNS A records pointing on your public IP for: letstest.example.com and 
 
 ```bash
 sudo docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest.example.com server1 www.mysite1.com:80
-sudo docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest2.example.com server1 www.mysite2.com:80
-sudo docker restart lets-haproxy
 ```
 
 ## Renew certificates 
@@ -34,14 +29,12 @@ Older than 15 days:
 
 ```bash
 sudo docker exec -it lets-haproxy /renew-certs.sh
-sudo docker restart lets-haproxy
 ```
 
 Older than 45 days:
 
 ```bash
 sudo docker exec -it lets-haproxy /renew-certs.sh 45
-sudo docker restart lets-haproxy
 ```
 
 ## Useful commands:

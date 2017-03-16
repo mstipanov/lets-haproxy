@@ -7,7 +7,7 @@ RUN apk add --update  \
   python python-dev py-pip \
   gcc musl-dev linux-headers \
   augeas-dev openssl-dev libffi-dev ca-certificates dialog \
-  openssl \
+  openssl bash \
   && rm -rf /var/cache/apk/*
 
 RUN pip install --upgrade pip && pip install -U letsencrypt
