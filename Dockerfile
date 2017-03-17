@@ -4,14 +4,14 @@ ENTRYPOINT ["/config-merge-entrypoint.sh"]
 CMD ["haproxy", "-f", "/usr/local/etc/haproxy/haproxy.cfg", "-V"]
 
 RUN apk add --update  \
-  python python-dev py-pip \
-  gcc musl-dev linux-headers \
-  augeas-dev openssl-dev libffi-dev ca-certificates dialog \
-  openssl bash \
-  && rm -rf /var/cache/apk/*
-
-RUN pip install --upgrade pip && pip install -U letsencrypt
-RUN mkdir -p /var/lib/haproxy/webroot
+   python python-dev py-pip \
+   gcc musl-dev linux-headers \
+   augeas-dev openssl-dev libffi-dev ca-certificates dialog \
+   openssl bash \
+   && pip install --upgrade pip && pip install -U letsencrypt \
+   && mkdir -p /var/lib/haproxy/webroot \
+   && apk del gcc musl-dev linux-headers augeas-dev openssl-dev libffi-dev \
+   && rm -rf /var/cache/apk/*
 
 COPY docker/config-merge.sh             /config-merge.sh
 COPY docker/config-merge-entrypoint.sh  /config-merge-entrypoint.sh
