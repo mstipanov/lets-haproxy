@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 CONFIG_DIR=$1
 if [[ -z "${CONFIG_DIR}" ]]; then
