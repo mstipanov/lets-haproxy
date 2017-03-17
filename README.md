@@ -25,16 +25,16 @@ sudo docker exec -it lets-haproxy /add-site.sh your.email@example.com letstest.e
 ```
 
 ## Renew certificates 
-Older than 15 days:
+If certificate expires in 15 days or less:
 
 ```bash
 sudo docker exec -it lets-haproxy /renew-certs.sh
 ```
 
-Older than 45 days:
+If certificate expires in 60 days or less:
 
 ```bash
-sudo docker exec -it lets-haproxy /renew-certs.sh 45
+sudo docker exec -it lets-haproxy /renew-certs.sh 60
 ```
 
 ## Useful commands:

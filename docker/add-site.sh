@@ -16,6 +16,7 @@ fi
 if [ ! -d "${LETSENCRYPT_LIVE_DIR}/$DOMAIN" ]; then
     echo "Generating new certificate for $DOMAIN"
     letsencrypt certonly -n --text --webroot --webroot-path $WEBROOT_DIR -d $DOMAIN --renew-by-default --agree-tos --email $E_MAIL
+    echo "$E_MAIL" > $LETSENCRYPT_LIVE_DIR/$DOMAIN/email
 else
     echo "Certificate exists for $DOMAIN"
 fi

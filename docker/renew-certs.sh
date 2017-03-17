@@ -22,7 +22,7 @@ if [ "$(ls -A /usr/local/etc/haproxy/haproxy.cfg.d/)" ]; then
                 else
                     echo "The certificate for ${DOMAIN} will expire in ${diff} days."
                 fi
-                letsencrypt certonly -n --text --webroot --webroot-path $WEBROOT_DIR -d $DOMAIN --renew-by-default --agree-tos --email $(cat /usr/local/etc/haproxy/haproxy.cfg.d/$DOMAIN/email)
+                letsencrypt certonly -n --text --webroot --webroot-path $WEBROOT_DIR -d $DOMAIN --renew-by-default --agree-tos --email $(cat $LETSENCRYPT_LIVE_DIR/$DOMAIN/email)
             fi
         else
             echo "WARNING: Skipping $DOMAIN"
