@@ -25,7 +25,7 @@ if [ ! -d "${CONFIG_DIR}/$DOMAIN" ]; then
 
     mkdir -p "${CONFIG_DIR}/$DOMAIN"
 
-    cp -f ${TEMPLATES_DIR}/* ${CONFIG_DIR}/$DOMAIN/
+    cp -f ${TEMPLATES_DIR}/domain/* ${CONFIG_DIR}/$DOMAIN/
 
     i=0
     for var in "$@"

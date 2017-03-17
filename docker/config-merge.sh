@@ -16,9 +16,9 @@ append_haproxy_conf () {
 }
 
 rm -f $HAPROXY_CONFIG
-append_haproxy_conf /usr/local/etc/haproxy/config/templates/global.cfg
-append_haproxy_conf /usr/local/etc/haproxy/config/templates/defaults.cfg
-append_haproxy_conf /usr/local/etc/haproxy/config/templates/frontend_http.cfg
+append_haproxy_conf ${TEMPLATES_DIR}/global.cfg
+append_haproxy_conf ${TEMPLATES_DIR}/defaults.cfg
+append_haproxy_conf ${TEMPLATES_DIR}/frontend_http.cfg
 https_exists=0
 if [ "$(ls -A /usr/local/etc/haproxy/haproxy.cfg.d/)" ]; then
     for i in `ls -v /usr/local/etc/haproxy/haproxy.cfg.d/`; do
@@ -34,11 +34,11 @@ if [ "$(ls -A /usr/local/etc/haproxy/haproxy.cfg.d/)" ]; then
         fi
     done;
 fi
-append_haproxy_conf /usr/local/etc/haproxy/config/templates/http_frontend_default.cfg
+append_haproxy_conf ${TEMPLATES_DIR}/http_frontend_default.cfg
 
 if [ "$https_exists" -eq "1" ]; then
     if [ "$(ls -A /usr/local/etc/haproxy/haproxy.cfg.d/)" ]; then
-        append_haproxy_conf /usr/local/etc/haproxy/config/templates/frontend_https.cfg
+        append_haproxy_conf ${TEMPLATES_DIR}/frontend_https.cfg
         for i in `ls -v /usr/local/etc/haproxy/haproxy.cfg.d/`; do
             domain=${i##*/}
             if [ -f "/usr/local/etc/haproxy/haproxy.cfg.d/$domain/frontend_https.cfg" ]; then
@@ -50,7 +50,7 @@ if [ "$https_exists" -eq "1" ]; then
         done;
         sed -i -- 's/<https_frontend_certs>//g' $HAPROXY_CONFIG
     fi
-    append_haproxy_conf /usr/local/etc/haproxy/config/templates/https_frontend_default.cfg
+    append_haproxy_conf ${TEMPLATES_DIR}/https_frontend_default.cfg
 fi
 
 for i in `ls -v /usr/local/etc/haproxy/haproxy.cfg.d/`; do
@@ -61,4 +61,4 @@ for i in `ls -v /usr/local/etc/haproxy/haproxy.cfg.d/`; do
     fi
 done;
 
-append_haproxy_conf /usr/local/etc/haproxy/config/templates/backend_default.cfg
+append_haproxy_conf ${TEMPLATES_DIR}/backend_default.cfg
