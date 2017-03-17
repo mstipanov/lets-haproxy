@@ -30,5 +30,5 @@ if [ "$(ls -A /usr/local/etc/haproxy/haproxy.cfg.d/)" ]; then
     done;
 fi
 
-echo "Soft reloading haproxy by sending SIGHUP"
-kill -1 1
+echo "Soft reloading haproxy"
+/usr/local/sbin/haproxy -p /run/haproxy.pid -f /usr/local/etc/haproxy/haproxy.cfg -Ds -sf $(cat /run/haproxy.pid) -V
