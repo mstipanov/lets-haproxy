@@ -18,8 +18,12 @@ fi
 
 docker rm -f lets-haproxy; echo ""
 
+mkdir -p ${CONFIG_DIR}/etc/
+mkdir -p ${CONFIG_DIR}/webroot/
+mkdir -p ${CONFIG_DIR}/letsencrypt/
+
 docker run --restart=unless-stopped \
-    -v ${CONFIG_DIR}/haproxy.cfg.d/:/usr/local/etc/haproxy/haproxy.cfg.d/ \
+    -v ${CONFIG_DIR}/etc/:/usr/local/etc/haproxy/ \
     -v ${CONFIG_DIR}/webroot/:/var/lib/haproxy/webroot/ \
     -v ${CONFIG_DIR}/letsencrypt/:/etc/letsencrypt/ \
     -p ${HTTP_PORT}:80 \
