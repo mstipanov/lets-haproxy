@@ -10,7 +10,7 @@ sudo su
 cd ~
 git clone https://github.com/mstipanov/lets-haproxy.git
 cd lets-haproxy
-cp -r example local
+mkdir local
 ./build.sh
 ./run.sh "$(pwd)/local" 80 443
 ```
